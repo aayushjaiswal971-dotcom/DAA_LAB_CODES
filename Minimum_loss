@@ -1,0 +1,54 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+public class Solution {
+    private static BufferedReader br;
+    private static StringTokenizer st;
+    private static PrintWriter pw;
+    public static void main(String[] args) throws IOException    {
+        br = new BufferedReader(new InputStreamReader(System.in));
+        pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        int qq = Integer.MAX_VALUE;
+        for(int casenum = 1; casenum <= qq; casenum++)    {
+            int n = readInt();
+            TreeSet<Long> set = new TreeSet<Long>();
+            long ret = Long.MAX_VALUE;
+            while(n-- > 0) {
+                long curr = readLong();
+                if(!set.isEmpty() && set.last() > curr) {
+                    ret = Math.min(ret, set.higher(curr) - curr);
+                }
+                set.add(curr);
+            }
+            pw.println(ret);
+        }
+        pw.close();
+    }
+    private static void exitImmediately()    {
+        pw.close();
+        System.exit(0);
+    }
+    private static long readLong() throws IOException    {
+        return Long.parseLong(nextToken());
+    }
+    private static double readDouble() throws IOException    {
+        return Double.parseDouble(nextToken());
+    }
+    private static int readInt() throws IOException    {
+        return Integer.parseInt(nextToken());
+    }
+
+    private static String nextToken() throws IOException    {
+        while(st == null || !st.hasMoreTokens())    {
+            if(!br.ready())    {
+                exitImmediately();
+            }
+            st = new StringTokenizer(br.readLine().trim());
+        }
+        return st.nextToken();
+    }
+}
